@@ -4,6 +4,8 @@ import Header from "../components/Header";
 import TopicsLnb from "../components/Header/Lnb/TopicsLnb";
 import {topicAction} from "../../redux/actionCreators";
 import {useSelector} from "react-redux";
+import {Route} from "react-router-dom";
+import SearchLnb from "../components/Header/Lnb/SearchLnb";
 
 const HeaderContainer = () => {
 
@@ -23,7 +25,14 @@ const HeaderContainer = () => {
     return (
         <Container>
             <Header/>
-            <TopicsLnb topics={list}/>
+
+            <Route path={'/Search/:category/:query'}>
+                    <SearchLnb/>
+            </Route>
+            <Route exact path={['/','/topics','/topics/:slug']}>
+                <TopicsLnb topics={list}/>
+            </Route>
+
         </Container>
     )
 }

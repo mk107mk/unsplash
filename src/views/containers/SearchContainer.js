@@ -3,12 +3,17 @@ import styled from 'styled-components';
 import {searchAction} from "../../redux/actionCreators";
 import {useSelector} from "react-redux";
 import PhotoList from "../components/List/PhotoList";
+import SearchRelatedMenu from "../components/Search/SearchRelatedMenu";
+import GridList from "../components/List/GridList";
+import CollectionItem from "../components/Items/CollectionItem";
+import UserItem from "../components/Items/UserItem";
 
 const SearchContainer = ({match}) => {
 
 
     const query = match.params.query;
-    const {photos} = useSelector(state => state.search);
+    const category = match.params.category;
+    const {photos,collections, users, related_searches} = useSelector(state => state.search);
 
     useEffect( () => {
       searchPhotos();
@@ -21,9 +26,28 @@ const SearchContainer = ({match}) => {
         })
     }
 
+    const RenderList = () => {
+        switch(category){
+            default: {
+                return <PhotoList data={photos?.results}/>
+            }
+            case 'collections':{
+                return <GridList  data={collections?.results} renderItem={(item,index) => <CollectionItem key={index} item={item}/>
+                }/>
+            }
+            case 'users':{
+                return <GridList data={users?.results} renderItem={(item,index) => <UserItem key={index} item={item}/>
+                }/>
+                }
+
+
+        }
+    }
+
     return (
         <Container>
-            <PhotoList data={photos?.results}/>
+            <SearchRelatedMenu data={related_searches} />
+            <RenderList/>
         </Container>
     )
 }
@@ -31,5 +55,6 @@ const SearchContainer = ({match}) => {
 const Container = styled.div`
 
 `;
+
 
 export default SearchContainer;
