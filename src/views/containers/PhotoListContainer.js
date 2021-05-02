@@ -21,7 +21,7 @@ const PhotoListContainer = () => {
 
     return (
         <Container>
-                <PhotoList data={list}/>
+                <PhotoList photos={list}/>
         </Container>
 
     )

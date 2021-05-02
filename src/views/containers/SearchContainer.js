@@ -7,19 +7,20 @@ import SearchRelatedMenu from "../components/Search/SearchRelatedMenu";
 import GridList from "../components/List/GridList";
 import CollectionItem from "../components/Items/CollectionItem";
 import UserItem from "../components/Items/UserItem";
+import {ContentContainer} from "../components/Layout/Layout.Styled";
 
 const SearchContainer = ({match}) => {
 
 
     const query = match.params.query;
     const category = match.params.category;
-    const {photos,collections, users, related_searches} = useSelector(state => state.search);
+    const {photos, collections, users, related_searches} = useSelector(state => state.search);
 
-    useEffect( () => {
-      searchPhotos();
+    useEffect(() => {
+        searchPhotos();
     }, [query])
 
-    const searchPhotos = () =>{
+    const searchPhotos = () => {
         searchAction.searchPhotos({
             query,
             per_page: 5
@@ -27,18 +28,19 @@ const SearchContainer = ({match}) => {
     }
 
     const RenderList = () => {
-        switch(category){
+        switch (category) {
             default: {
-                return <PhotoList data={photos?.results}/>
+                return <PhotoList photos={photos?.results}/>
             }
-            case 'collections':{
-                return <GridList  data={collections?.results} renderItem={(item,index) => <CollectionItem key={index} item={item}/>
+            case 'collections': {
+                return <GridList data={collections?.results}
+                                 renderItem={(item, index) => <CollectionItem key={index} item={item}/>
+                                 }/>
+            }
+            case 'users': {
+                return <GridList data={users?.results} renderItem={(item, index) => <UserItem key={index} item={item}/>
                 }/>
             }
-            case 'users':{
-                return <GridList data={users?.results} renderItem={(item,index) => <UserItem key={index} item={item}/>
-                }/>
-                }
 
 
         }
@@ -46,15 +48,27 @@ const SearchContainer = ({match}) => {
 
     return (
         <Container>
-            <SearchRelatedMenu data={related_searches} />
+            <ContentContainer>
+            <Title>
+                {query}
+            </Title>
+            <SearchRelatedMenu data={related_searches}/>
+                </ContentContainer>
             <RenderList/>
         </Container>
     )
 }
 
 const Container = styled.div`
-
+ 
 `;
 
+const Title = styled.div`
+  font-size: 46px;
+  color: #111;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 60px 0 30px;
+`;
 
 export default SearchContainer;

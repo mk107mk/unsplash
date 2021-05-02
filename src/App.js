@@ -8,9 +8,13 @@ import Search from "./views/pages/Search";
 import HeaderContainer from "./views/containers/HeaderContainer";
 import TopicDetail from "./views/pages/TopicDetail";
 import Topics from "./views/pages/Topics";
+import PopupContainer from "./views/containers/PopupContainer";
+import {useSelector} from "react-redux";
 
 
 const App = () => {
+
+    const {photoPopup}= useSelector( state=> state.photos);
 
     return (
         <Container>
@@ -23,7 +27,12 @@ const App = () => {
                 <Route path={"/topics/:slug"} component={TopicDetail}/>
 
 
+
             </Switch>
+            {
+                photoPopup &&
+                <PopupContainer/>
+            }
         </Container>
     )
 }

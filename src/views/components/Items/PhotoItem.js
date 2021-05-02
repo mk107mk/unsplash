@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import {IconDownload, IconHeart, IconPlus} from "../../../icons";
 
-const PhotoItem = ({urls, user}) => {
-
+const PhotoItem = ({id, urls, user, onClick}) => {
+    console.log("@@id, @@urls, @@user, @@onClick",id, urls, user, onClick);
     return (
-        <Container>
+        <Container onClick={ () => onClick(id)}>
             <Thumb>
                 <img src={urls.regular} alt=""/>
             </Thumb>
@@ -51,11 +51,12 @@ const Container = styled.div`
 `;
 
 const Thumb = styled.div`
-  height: 270px;
+
   img{
     width: 100%;
     height: 100%;
     object-fit: cover;
+    
   }
 `;
 

@@ -7,7 +7,6 @@ const SearchRelatedMenu = ({data}) => {
 
     return (
         <Container>
-            <ContentContainer>
             <ScrollMenu data={data}
                     renderItem={(item, index) => (
                         <NavItem key={index}>
@@ -15,13 +14,12 @@ const SearchRelatedMenu = ({data}) => {
                         </NavItem>
                     )}
             />
-            </ContentContainer>
         </Container>
     )
 }
 
 const Container = styled.div`
-
+  margin-bottom: 22px;
 `;
 
 const NavItem = styled.div`

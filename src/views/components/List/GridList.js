@@ -22,7 +22,7 @@ const GridList = ({data = [], renderItem}) => {
 }
 
 const Container = styled.div`
-
+ 
 `;
 
 const Row = styled.div`
@@ -35,6 +35,7 @@ const Row = styled.div`
 const Col = styled.div`
   padding: 15px;
   width: 33.33%;
+
 `;
 
 export default GridList;
