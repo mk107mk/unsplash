@@ -10,6 +10,7 @@ import TopicDetail from "./views/pages/TopicDetail";
 import Topics from "./views/pages/Topics";
 import PopupContainer from "./views/containers/PopupContainer";
 import {useSelector} from "react-redux";
+import { BrowserRouter } from 'react-router-dom';
 
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
         <Container>
             <GlobalStyle/>
             <HeaderContainer/>
+            
             <Switch>
                 <Route exact path={"/"} component={Main}/>
                 <Route path={"/search/:category/:query"} component={Search}/>
@@ -29,6 +31,7 @@ const App = () => {
 
 
             </Switch>
+            
             {
                 photoPopup &&
                 <PopupContainer/>
