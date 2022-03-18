@@ -21,7 +21,7 @@ const App = () => {
             <GlobalStyle/>
             <HeaderContainer/>
             <Switch>
-                <Route exact path={"/unsplash"} component={Main}/>
+                <Route exact path={"/"} component={Main}/>
                 <Route path={"/search/:category/:query"} component={Search}/>
                 <Route exact path={"/topics"} component={Topics}/>
                 <Route path={"/topics/:slug"} component={TopicDetail}/>
